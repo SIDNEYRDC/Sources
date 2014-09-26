@@ -8,16 +8,45 @@ using namespace arma;
 // Enumerate all connected subgraphs on a graph
 void subgraph(umat &S, vector<int> sg, mat A, uvec N, unsigned int depth, int &id_s, int id_sg) {
 	for(unsigned int i = 0; i < N.n_elem; i++) {
+		// If neighbor i not exist in sg
 		if(find(sg.begin(), sg.end(), N(i)) == sg.end()) {
+			// The subgraph set
 			sg[id_sg] = N(i);
+
+			// The neighbor of actual node set
 			uvec N_j = find(A.col(N(i)));
+
+			// Test the function reach the top of stack
 			if(depth > 1) subgraph(S,sg,A,N_j,depth-1,id_s,id_sg+1);
 			else {
-				id_s++;
-				S.resize(id_s+1,S.n_cols);
+				float sum = 0, sum2 = 0;
+				bool exist = false;
 
+				// The sum of squares for actual subgraph
 				for(unsigned int k = 0; k < S.n_cols; k++) {
-					S(id_s,k) = sg[k];
+					sum += pow(sg[k],2);
+				}
+
+				// The sum of squares for all generated subgraphs
+				for(unsigned int r = 0; r < S.n_rows; r++) {
+					sum2 = 0;
+					for(unsigned int k = 0; k < S.n_cols; k++) {
+						sum2 += pow(S(r,k),2);
+					}
+					if(sum2 == sum) {
+						exist = true;
+						break;
+					}
+				}
+
+				// If the actual subgraph not exist in S, save it
+				if(!exist) {
+					id_s++;
+					S.resize(id_s+1,S.n_cols);
+
+					for(unsigned int k = 0; k < S.n_cols; k++) {
+						S(id_s,k) = sg[k];
+					}
 				}
 			}
 		}
@@ -30,6 +59,7 @@ void subgraph(umat &S, mat A, unsigned int depth) {
 	int id_s = -1, id_sg = 0;
 	vector<int> sg(S.n_cols);
 
+	// For all nodes, generate the connected subgraphs
 	for(unsigned int i = 0; i < n; i++) {
 		sg[id_sg] = i;
 		uvec N = find(A.col(i));
@@ -44,15 +74,15 @@ int main()
 	mat A = zeros<mat>(n,n);
 
 	A
-	<< 0 << 3 << 5 << 0 << 0 << 0 << endr
+	<< 0 << 3 << 5 << 0 << 0 << 7 << endr
 	<< 3 << 0 << 4 << 0 << 0 << 0 << endr
 	<< 5 << 4 << 0 << 6 << 0 << 0 << endr
 	<< 0 << 0 << 6 << 0 << 1 << 2 << endr
 	<< 0 << 0 << 0 << 1 << 0 << 3 << endr
-	<< 0 << 0 << 0 << 2 << 3 << 0 << endr;
+	<< 7 << 0 << 0 << 2 << 3 << 0 << endr;
 
-	umat S = zeros<umat>(1,3);
-	subgraph(S,A,3);
+	umat S = zeros<umat>(1,4);
+	subgraph(S,A,4);
 
 	for(unsigned int i = 0; i < S.n_rows; i++) {
 		cout << S(i,span()) << endl;

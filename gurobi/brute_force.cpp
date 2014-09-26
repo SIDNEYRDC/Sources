@@ -10,15 +10,15 @@ static const char alphabet[] =
 "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 "0123456789";
 
-static const char V[] = "0123456";
+//static const char V[] = "0123456";
 
 static const int alphabetSize = sizeof(alphabet) - 1;
 
 void bruteImpl(char* str, int index, int maxDepth)
 {
-    for (int i = index; i < 6; ++i)
+    for (int i = index; i < alphabetSize; ++i)
     {
-        str[index] = V[i];
+        str[index] = alphabet[i];
 
         if (index == maxDepth - 1) printf("%s\n", str);
         else bruteImpl(str, index + 1, maxDepth);
