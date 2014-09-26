@@ -47,3 +47,4 @@ if __name__ == "__main__":
     deauth_pckt_count = raw_input('Number of deauth packets (Default: -1 [constant]): ')
     if not deauth_pckt_count: deauth_pckt_count = -1
     perform_deauth(target_bssid, target_client, deauth_pckt_count)
+
