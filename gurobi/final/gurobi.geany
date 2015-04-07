@@ -23,11 +23,10 @@ long_line_behaviour=1
 long_line_column=72
 
 [files]
-current_page=3
-FILE_NAME_0=715;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Fmain.cpp;0;4
-FILE_NAME_1=246;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Fgraph_utils.hpp;0;4
-FILE_NAME_2=268;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Fk_optimization.hpp;0;4
-FILE_NAME_3=116;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Fk_optimization.cpp;0;4
+current_page=2
+FILE_NAME_0=3835;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Fmain.cpp;0;4
+FILE_NAME_1=1330;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Futils.cpp;0;4
+FILE_NAME_2=1867;C++;0;EUTF-8;1;1;1;%2Fhome%2Fsidney%2FProgramacao%2Fgurobi%2Ffinal%2Futils.hpp;0;4
 
 [VTE]
 last_dir=/home/sidney/Programacao/gurobi/final

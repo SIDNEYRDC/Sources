@@ -5,23 +5,34 @@ using namespace std;
 using namespace arma;
 
 // Combine Cn,d distint
-void combine(vector<unsigned int> S, unsigned int id, unsigned int index, unsigned int depth, unsigned int n) {
+void combine(umat &S, vector<unsigned int> sg, unsigned int id, unsigned int depth, unsigned int n, unsigned int &id_s, unsigned int id_sg) {
 	for(unsigned int i = id; i < n - (depth - 1); i++) {
-		S[index] = i;
+		// The subgraph set
+		sg[id_sg] = i;
 
-		if(depth > 1) combine(S,i+1,index+1,depth-1,n);
+		// Test the function reach the top of stack
+		if(depth > 1) combine(S,sg,i+1,depth-1,n,id_s,id_sg+1);
 		else {
-			for(unsigned int k = 0; k < S.size(); k++) {
-				cout << S[k] << " ";
+			// Increment S index
+			id_s++;
+
+			// Resize S
+			S.resize(id_s+1,S.n_cols);
+
+			// Store combination in S
+			for(unsigned int k = 0; k < S.n_cols; k++) {
+				S(id_s,k) = sg[k];
 			}
-			cout << endl;
 		}
 	}
 }
 
 // Overload in combine
-void combine(vector<unsigned int> S, unsigned int depth, unsigned int n) {
-	combine(S,0,0,depth,n);
+void combine(umat &S, unsigned int depth, unsigned int n) {
+	vector<unsigned int> sg(depth);
+	unsigned int id_s = 0;
+
+	combine(S,sg,0,depth,n,id_s,0);
 }
 
 void subgraph(vector<int> S, mat A, uvec N, int elem, int depth, int index);
@@ -32,8 +43,10 @@ int main()
 	unsigned int n = 20;
 
 	for(unsigned int size = 3; size <= n / 2; size++) {
-		vector<unsigned int> S(size);
+		umat S = zeros<umat>(1,size);
 		combine(S,size,n);
+
+		cout << "S:\n" << S << endl;
 	}
     //int n = 6;
     //int moedas[8] = {1, 2, 5, 10, 20, 50, 100, 200};

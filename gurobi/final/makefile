@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-c -Wall -Wextra -pedantic -ggdb -O2
+CFLAGS=-c -Wall -Wextra -Wfatal-errors -pedantic -ggdb -std=c++0x -O3 
 LDFLAGS=-L/opt/gurobi563/linux64/lib -I/opt/gurobi563/linux64/include -lgurobi_g++4.1 -lgurobi56 -larmadillo
 SOURCES=*.cpp
 OBJECTS=$(SOURCES:.cpp=.o)
