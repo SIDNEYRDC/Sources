@@ -7,17 +7,18 @@
 #include <cstring>
 #include <armadillo>
 #include "/opt/gurobi563/linux64/include/gurobi_c++.h"
+#include "k-optimization.cpp"
 
 #define MIN_ERR 1e-3
 
 using namespace std;
 using namespace arma;
 
-typedef struct edge {
-	unsigned int i;	// i vertice
-	unsigned int j;	// j vertice
-	double w;		// weight of edge
-} edge;
+//typedef struct edge {
+	//unsigned int i;	// i vertice
+	//unsigned int j;	// j vertice
+	//double w;		// weight of edge
+//} edge;
 
 // Logic or between two matrices
 mat logic_or(mat x, mat y) {
@@ -119,10 +120,11 @@ bool is_critical(mat A, unsigned int node) {
 // Find all critical nodes in the graph
 uvec critical_nodes(mat A) {
 	uvec c_nodes;
+	unsigned int n = A.n_rows, c_num;
 
-	for(unsigned int id = 0; id < A.n_rows; id++) {
+	for(unsigned int id = 0; id < n; id++) {
 		if(is_critical(A,id)) {
-			unsigned int c_num = c_nodes.n_elem;
+			c_num = c_nodes.n_elem;
 			c_nodes.resize(c_num+1);
 			c_nodes(c_num) = id;
 		}
@@ -153,7 +155,7 @@ int main() {
 	<< 7 << 0 << 0 << 2 << 3 << 0 << endr;
 
 	uvec c_nodes = critical_nodes(logic_or(A,zeros<mat>(n,n)));
-	cout << "c_nodes:\n" << c_nodes << endl;
+	//cout << "c_nodes:\n" << c_nodes << endl;
 
 	// Determine the size of Edges vector: sum(n-i)_{i=1}^{n-1}
 	unsigned int n_xe = 0;
@@ -219,39 +221,76 @@ int main() {
 		c0Expr.addTerms(coef1,Xe,n_xe);
 		model.addConstr(c0Expr,GRB_EQUAL,n-1,"c0");
 
-		// Dynamic linear expressions for make constraints
-		GRBLinExpr *lhsExprs = new GRBLinExpr[2*n];
-		char *senses = new char[2*n];
-		double *rhsVals = new double[2*n];
-		names = new string[2*n];
+		for(unsigned int depth = 3; depth <= n / 2; depth++) {
+			// Subgraphs set
+			umat S = zeros<umat>(1,depth);
 
-		// Make the 2nd and 3rd type of constraints
-		unsigned int e;
-		for(unsigned int v = 0; v < n; v++) {
-			e = 0;
-			while(e < n_xe) {
-				if(edges[e].i == v || edges[e].j == v) {
-					lhsExprs[v] += Xe[e];
-					lhsExprs[n+v] += Xe[e];
+			// Generate all connected subgraphs with size = depth
+			subgraph(S,A,depth);
+
+			// Constraint number
+			unsigned int n_c = S.n_rows;
+
+			// Dynamic linear expressions for make constraints
+			GRBLinExpr *lhsExprs = new GRBLinExpr[n_c];
+			char *senses = new char[n_c];
+			double *rhsVals = new double[n_c];
+			names = new string[n_c];
+			stringstream ss;
+
+			for(unsigned int c = 0; c < n_c; c++) {
+				cout << S(c,span()) << endl;
+
+				for(unsigned int v1 = 0; v1 < depth-1; v1++) {
+					for(unsigned int v2 = v1+1; v2 < depth; v2++) {
+						for(unsigned int e = 0; e < n_xe; e++) {
+							if((edges[e].i == S(c,v1) && edges[e].j == S(c,v2)) || (edges[e].j == S(c,v1) && edges[e].i == S(c,v2))) {
+								lhsExprs[c] += Xe[e];
+							}
+						}
+					}
 				}
-				e++;
+
+				//cout << "expr:" << lhsExprs[c] << endl;
+
+				// Make the constraint of type x0 + x1 + ... + xn = |S| - 1 for all S \in V
+				senses[c] = GRB_LESS_EQUAL;
+				rhsVals[c] = depth - 1;
+				ss << "c" << c << "-" << depth;
+				names[c] = ss.str();
 			}
 
-			// Make the constraint of type x0 + x1 + ... + xn >= 1
-			senses[v] = GRB_GREATER_EQUAL;
-			rhsVals[v] = 1;
-			stringstream ss; ss << "c" << v+1;
-			names[v] = ss.str();
-
-			// Make the constraint of type x0 + x1 + ... + xn <= 2
-			senses[n+v] = GRB_LESS_EQUAL;
-			rhsVals[n+v] = 2;
-			ss << "c" << v+n+1;
-			names[n+v] = ss.str();
+			// Add constraint to model
+			model.addConstrs(lhsExprs,senses,rhsVals,names,n_c);
 		}
 
+		//// Make the 2nd and 3rd type of constraints
+		//unsigned int e;
+		//for(unsigned int v = 0; v < n; v++) {
+			//e = 0;
+			//while(e < n_xe) {
+				//if(edges[e].i == v || edges[e].j == v) {
+					//lhsExprs[v] += Xe[e];
+					//lhsExprs[n+v] += Xe[e];
+				//}
+				//e++;
+			//}
+
+			//// Make the constraint of type x0 + x1 + ... + xn >= 1
+			//senses[v] = GRB_GREATER_EQUAL;
+			//rhsVals[v] = 1;
+			//stringstream ss; ss << "c" << v+1;
+			//names[v] = ss.str();
+
+			//// Make the constraint of type x0 + x1 + ... + xn <= 2
+			//senses[n+v] = GRB_LESS_EQUAL;
+			//rhsVals[n+v] = 2;
+			//ss << "c" << v+n+1;
+			//names[n+v] = ss.str();
+		//}
+
 		// Add constraint to model
-		model.addConstrs(lhsExprs,senses,rhsVals,names,2*n);
+		//model.addConstrs(lhsExprs,senses,rhsVals,names,2*n);
 
 
 		//lhsExprs = new GRBLinExpr[c_nodes.n_elem];
@@ -286,16 +325,21 @@ int main() {
 		// Optimize model
 		model.optimize();
 
-		A = zeros<mat>(n,n);
+		mat out = zeros<mat>(n,n);
 		for(unsigned int i = 0; i < n_xe; i++) {
 			cout << Xe[i].get(GRB_StringAttr_VarName) << " = " << Xe[i].get(GRB_DoubleAttr_X) << endl;
 
 			if(Xe[i].get(GRB_DoubleAttr_X) > 0) {
-				A(edges[i].i,edges[i].j) = A(edges[i].j,edges[i].i) = 1;
+				if(A(edges[i].i,edges[i].j) && A(edges[i].j,edges[i].i))
+					out(edges[i].i,edges[i].j) = out(edges[i].j,edges[i].i) = edges[i].w;
+				else if(A(edges[i].i,edges[i].j))
+					out(edges[i].i,edges[i].j) = edges[i].w;
+				else if(A(edges[i].j,edges[i].i))
+					out(edges[i].j,edges[i].i) = edges[i].w;
 			}
 		}
 
-		cout << "minA:\n" << A << endl;
+		cout << "minA:\n" << out << endl;
 		cout << "Obj: " << model.get(GRB_DoubleAttr_ObjVal) << endl;
 
 	} catch(GRBException e) {

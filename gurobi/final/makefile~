@@ -11,7 +11,7 @@ $(EXECUTABLE): $(OBJECTS)
 	$(CC) $(OBJECTS) -o $@ $(LDFLAGS)
 	
 $(OBJECTS): $(SOURCES)
-	$(CC) $(CFLAGS) $(SOURCES) > ../obj
+	$(CC) $(CFLAGS) $(SOURCES)
 	
 clean:
 	rm -rf $(OBJECTS) $(EXECUTABLE)

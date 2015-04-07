@@ -4,7 +4,6 @@
 using namespace std;
 using namespace arma;
 
-
 // Enumerate all connected subgraphs on a graph
 void subgraph(umat &S, vector<int> sg, mat A, uvec N, unsigned int depth, int &id_s, int id_sg) {
 	for(unsigned int i = 0; i < N.n_elem; i++) {
@@ -69,7 +68,7 @@ void subgraph(umat &S, mat A, unsigned int depth) {
 
 int main()
 {
-	int n = 6;
+	unsigned int n = 6;
 	// Weighted adjacency matrix
 	mat A = zeros<mat>(n,n);
 
@@ -81,11 +80,13 @@ int main()
 	<< 0 << 0 << 0 << 1 << 0 << 3 << endr
 	<< 7 << 0 << 0 << 2 << 3 << 0 << endr;
 
-	umat S = zeros<umat>(1,4);
-	subgraph(S,A,4);
+	for(unsigned int depth = 3; depth <= n / 2; depth++) {
+		umat S = zeros<umat>(1,depth);
+		subgraph(S,A,depth);
 
-	for(unsigned int i = 0; i < S.n_rows; i++) {
-		cout << S(i,span()) << endl;
+		for(unsigned int i = 0; i < S.n_rows; i++) {
+			cout << S(i,span()) << endl;
+		}
 	}
 
 	//vector< vector<int> > S(1, vector<int>(3));
