@@ -1,0 +1,80 @@
+#
+# 'make depend' uses makedepend to automatically generate dependencies
+#               (dependencies are added to end of Makefile)
+# 'make'        build executable file 'mycc'
+# 'make clean'  removes all .o and executable files
+#
+
+# define the C compiler to use
+CC = h5c++
+
+# define any compile-time flags
+CFLAGS = -Wall -Wextra -Wfatal-errors -pedantic -ggdb -std=c++0x -O3
+
+# define any directories containing header files other than /usr/include
+INCLUDES = -I/opt/gurobi563/linux64/include
+
+# define library paths in addition to /usr/lib
+#   if I wanted to include libraries not in /usr/lib I'd specify
+#   their path using -Lpath, something like:
+LFLAGS = -L/opt/gurobi563/linux64/lib
+
+# define any libraries to link into executable:
+#   if I want to link in libraries (libx.so or libx.a) I use the -llibname
+#   option, something like (this will link in libmylib.so and libm.so:
+LIBS = -lgurobi_g++4.1 -lgurobi56 -larmadillo -lQuadProgpp
+
+# define the C source files
+#SRCS = k_optimization.cpp file_utils.cpp graph_utils.cpp MatFile.cpp motion_control.cpp robot.cpp utils.cpp main.cpp
+SRCS = $(wildcard *.cpp)
+
+# define objects directory
+OBJDIR = ../obj
+
+# define output directory
+OUTDIR = ../bin
+
+# define the C object files
+#
+# This uses Suffix Replacement within a macro:
+#   $(name:string1=string2)
+#         For each word in 'name' replace 'string1' with 'string2'
+# Below we are replacing the suffix .c of all words in the macro SRCS
+# with the .o suffix
+#
+OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.cpp=.o))
+#OBJS = $(SRCS:.c=.o)
+
+# define the executable file
+MAIN = $(addprefix $(OUTDIR)/, main)
+
+#
+# The following part of the makefile is generic; it can be used to
+# build any executable just by changing the definitions above and by
+# deleting dependencies appended to the file from 'make depend'
+#
+
+.PHONY: depend clean
+
+all: $(MAIN)
+	@echo  The simulator has been compiled
+
+$(MAIN): $(OBJS)
+	$(CC) $(CFLAGS) $(INCLUDES) -o $(MAIN) $(OBJS) $(LFLAGS) $(LIBS)
+
+# this is a suffix replacement rule for building .o's from .c's
+# it uses automatic variables $<: the name of the prerequisite of
+# the rule(a .c file) and $@: the name of the target of the rule (a .o file)
+# (see the gnu make manual section about automatic variables)
+#.cpp.o:
+#	$(CC) $(CFLAGS) $(INCLUDES) -c $<  -o $@
+$(OBJS): $(SRCS)
+	$(CC) $(CFLAGS) -c $(SRCS)
+
+clean:
+	$(RM) $(OBJS) *~ $(MAIN)
+
+depend: $(SRCS)
+	makedepend $(INCLUDES) $^
+
+# DO NOT DELETE THIS LINE -- make depend needs it
