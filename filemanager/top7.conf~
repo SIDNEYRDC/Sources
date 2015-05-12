@@ -1,0 +1,48 @@
+# Topology configuration file
+
+[simulation-configuration]
+# Number of iterations
+n_iter: 500
+
+# Data capture frequency
+dc: 1
+
+# Enable optimization of links (0:disable; 1:local-MST; 2:global-MST; 3:2-MST)
+opt_link: 1
+
+# Enable reference pass
+ref_pass: 0
+#
+[robot-positions]
+# bot: x y
+0: 1.015274 3.095245
+1: 2.166065 1.206092
+2: 0.841353 2.187477
+3: 2.724059 1.254211
+4: 1.998972 2.243757
+5: 2.041575 3.264613
+6: 2.490148 1.876049
+7: 1.537040 2.361741
+8: 2.496052 3.997590
+9: 1.895814 3.275446
+
+[robot-velocities]
+# bot: vx vy
+1: 2 3
+
+[robot-ranges]
+# bot: R r
+0: 1.0 0
+1: 1.0 0
+2: 1.0 0
+3: 1.0 0
+4: 1.0 0
+5: 1.0 0
+6: 1.0 0
+7: 1.0 0
+8: 1.0 0
+9: 1.0 0
+
+[reference]
+# bot: x y
+9: 0 4
