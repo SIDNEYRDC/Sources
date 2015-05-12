@@ -1,0 +1,146 @@
+	ros_teste.vim	/^nnoremap <silent>  :call CommentLine()$/;"	m
+	ros_teste.vim	/^onoremap <silent>  :call CommentLine()$/;"	m
+	ros_teste.vim	/^vnoremap <silent>  :call RangeCommentLine()$/;"	m
+	ros_teste.vim	/^inoremap <buffer> <silent>  =AutoPairsDelete()$/;"	m
+	ros_teste.vim	/^inoremap <buffer> <silent>   =AutoPairsSpace()$/;"	m
+<Down>	ros_teste.vim	/^map <Down> :tabl$/;"	m
+<Left>	ros_teste.vim	/^map <Left> :tabp$/;"	m
+<Right>	ros_teste.vim	/^map <Right> :tabn$/;"	m
+<Up>	ros_teste.vim	/^map <Up> :tabr$/;"	m
+	ros_teste.vim	/^nnoremap <silent>  :call UnCommentLine()$/;"	m
+	ros_teste.vim	/^onoremap <silent>  :call UnCommentLine()$/;"	m
+	ros_teste.vim	/^vnoremap <silent>  :call RangeUnCommentLine()$/;"	m
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+"	ros_teste.vim	/^inoremap <buffer> <silent> " =AutoPairsInsert('"')$/;"	m
+'	ros_teste.vim	/^inoremap <buffer> <silent> ' =AutoPairsInsert('''')$/;"	m
+(	ros_teste.vim	/^inoremap <buffer> <silent> ( =AutoPairsInsert('(')$/;"	m
+)	ros_teste.vim	/^inoremap <buffer> <silent> ) =AutoPairsInsert(')')$/;"	m
+0	ros_teste.vim	/^normal! 0$/;"	m
+<BS>	ros_teste.vim	/^inoremap <buffer> <silent> <BS> =AutoPairsDelete()$/;"	m
+<C-Left>	ros_teste.vim	/^imap <silent> <C-Left>  <Plug>Move2LeftTab $/;"	m
+<C-Left>	ros_teste.vim	/^map <silent> <C-Left> <Plug>Move2LeftTab$/;"	m
+<C-Right>	ros_teste.vim	/^imap <silent> <C-Right>  <Plug>Move2RightTab $/;"	m
+<C-Right>	ros_teste.vim	/^map <silent> <C-Right> <Plug>Move2RightTab$/;"	m
+<F11>	ros_teste.vim	/^nnoremap <silent> <F11> :call conque_term#exec_file()$/;"	m
+<F1>	ros_teste.vim	/^map <F1> <Plug>ShowFunc$/;"	m
+<F1>	ros_teste.vim	/^map! <F1> <Plug>ShowFunc$/;"	m
+<F2>	ros_teste.vim	/^map <F2> :Vex$/;"	m
+<F3>	ros_teste.vim	/^map <F3> :se autochdir | ConqueTermSplit bash$/;"	m
+<F4>	ros_teste.vim	/^map <F4> :q!$/;"	m
+<F5>	ros_teste.vim	/^map <F5> :tab ball$/;"	m
+<Plug>NERDCommenterAlignBoth	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterAlignBoth :call NERDComment(0, "alignBoth")$/;"	m
+<Plug>NERDCommenterAlignBoth	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterAlignBoth :call NERDComment(1, "alignBoth")$/;"	m
+<Plug>NERDCommenterAlignLeft	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterAlignLeft :call NERDComment(0, "alignLeft")$/;"	m
+<Plug>NERDCommenterAlignLeft	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterAlignLeft :call NERDComment(1, "alignLeft")$/;"	m
+<Plug>NERDCommenterAppend	ros_teste.vim	/^nmap <silent> <Plug>NERDCommenterAppend :call NERDComment(0, "append")$/;"	m
+<Plug>NERDCommenterComment	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterComment :call NERDComment(0, "norm")$/;"	m
+<Plug>NERDCommenterComment	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterComment :call NERDComment(1, "norm")$/;"	m
+<Plug>NERDCommenterInInsert	ros_teste.vim	/^inoremap <silent> <Plug>NERDCommenterInInsert  <BS>:call NERDComment(0, "insert")$/;"	m
+<Plug>NERDCommenterInvert	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterInvert :call NERDComment(0, "invert")$/;"	m
+<Plug>NERDCommenterInvert	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterInvert :call NERDComment(1, "invert")$/;"	m
+<Plug>NERDCommenterMinimal	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterMinimal :call NERDComment(0, "minimal")$/;"	m
+<Plug>NERDCommenterMinimal	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterMinimal :call NERDComment(1, "minimal")$/;"	m
+<Plug>NERDCommenterNest	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterNest :call NERDComment(0, "nested")$/;"	m
+<Plug>NERDCommenterNest	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterNest :call NERDComment(1, "nested")$/;"	m
+<Plug>NERDCommenterSexy	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterSexy :call NERDComment(0, "sexy")$/;"	m
+<Plug>NERDCommenterSexy	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterSexy :call NERDComment(1, "sexy")$/;"	m
+<Plug>NERDCommenterToEOL	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterToEOL :call NERDComment(0, "toEOL")$/;"	m
+<Plug>NERDCommenterToggle	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment(0, "toggle")$/;"	m
+<Plug>NERDCommenterToggle	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterToggle :call NERDComment(1, "toggle")$/;"	m
+<Plug>NERDCommenterUncomment	ros_teste.vim	/^nnoremap <silent> <Plug>NERDCommenterUncomment :call NERDComment(0, "uncomment")$/;"	m
+<Plug>NERDCommenterUncomment	ros_teste.vim	/^vnoremap <silent> <Plug>NERDCommenterUncomment :call NERDComment(1, "uncomment")$/;"	m
+<Plug>NERDCommenterYank	ros_teste.vim	/^nmap <silent> <Plug>NERDCommenterYank :call NERDComment(0, "yank")$/;"	m
+<Plug>NERDCommenterYank	ros_teste.vim	/^vmap <silent> <Plug>NERDCommenterYank :call NERDComment(1, "yank")$/;"	m
+<Plug>NetrwBrowseX	ros_teste.vim	/^nnoremap <silent> <Plug>NetrwBrowseX :call netrw#NetrwBrowseX(expand("<cWORD>"),0)$/;"	m
+<S-Insert>	ros_teste.vim	/^map <S-Insert> <MiddleMouse>$/;"	m
+<S-Insert>	ros_teste.vim	/^map! <S-Insert> <MiddleMouse>$/;"	m
+<SNR>16_AutoPairsReturn	ros_teste.vim	/^inoremap <silent> <SNR>16_AutoPairsReturn =AutoPairsReturn()$/;"	m
+B_SIZE	node.hpp	23;"	d
+CC	makefile	/^CC = g++$/;"	m
+CFLAGS	makefile	/^CFLAGS = -Wall$/;"	m
+EXECUTABLE	makefile	/^EXECUTABLE = $(addprefix $(OUTDIR)\/, main)$/;"	m
+INCLUDES	makefile	/^INCLUDES = -I.\/$/;"	m
+LDFLAGS	makefile	/^LDFLAGS = -L.\/$/;"	m
+LIBS	makefile	/^LIBS = -lros_interface -lroscpp$/;"	m
+NODE_H	node.hpp	8;"	d
+OBJDIR	makefile	/^OBJDIR = .$/;"	m
+OBJECTS	makefile	/^OBJECTS = $(addprefix $(OBJDIR)\/, $(SOURCES:.cpp=.o))$/;"	m
+OUTDIR	makefile	/^OUTDIR = .$/;"	m
+ROS_INTERFACE_H	ros_interface.hpp	8;"	d
+SOURCES	makefile	/^SOURCES = $(wildcard *.cpp)$/;"	m
+SessionLoad	ros_teste.vim	/^let SessionLoad = 1$/;"	v
+T_REAL	node.hpp	18;"	d
+T_STAGE	node.hpp	19;"	d
+T_TURTLE	node.hpp	20;"	d
+[	ros_teste.vim	/^inoremap <buffer> <silent> [ =AutoPairsInsert('[')$/;"	m
+\c	ros_teste.vim	/^nmap \\c  <Plug>NERDCommenterToggle$/;"	m
+\c	ros_teste.vim	/^vmap \\c  <Plug>NERDCommenterToggle$/;"	m
+\c$	ros_teste.vim	/^nmap \\c$ <Plug>NERDCommenterToEOL$/;"	m
+\c$	ros_teste.vim	/^vmap \\c$ <Plug>NERDCommenterToEOL$/;"	m
+\cA	ros_teste.vim	/^nmap \\cA <Plug>NERDCommenterAppend$/;"	m
+\cA	ros_teste.vim	/^vmap \\cA <Plug>NERDCommenterAppend$/;"	m
+\ca	ros_teste.vim	/^nmap \\ca <Plug>NERDCommenterAltDelims$/;"	m
+\cb	ros_teste.vim	/^nmap \\cb <Plug>NERDCommenterAlignBoth$/;"	m
+\cb	ros_teste.vim	/^vmap \\cb <Plug>NERDCommenterAlignBoth$/;"	m
+\cc	ros_teste.vim	/^nmap \\cc <Plug>NERDCommenterComment$/;"	m
+\cc	ros_teste.vim	/^vmap \\cc <Plug>NERDCommenterComment$/;"	m
+\ci	ros_teste.vim	/^nmap \\ci <Plug>NERDCommenterInvert$/;"	m
+\ci	ros_teste.vim	/^vmap \\ci <Plug>NERDCommenterInvert$/;"	m
+\cl	ros_teste.vim	/^nmap \\cl <Plug>NERDCommenterAlignLeft$/;"	m
+\cl	ros_teste.vim	/^vmap \\cl <Plug>NERDCommenterAlignLeft$/;"	m
+\cm	ros_teste.vim	/^nmap \\cm <Plug>NERDCommenterMinimal$/;"	m
+\cm	ros_teste.vim	/^vmap \\cm <Plug>NERDCommenterMinimal$/;"	m
+\cn	ros_teste.vim	/^nmap \\cn <Plug>NERDCommenterNest$/;"	m
+\cn	ros_teste.vim	/^vmap \\cn <Plug>NERDCommenterNest$/;"	m
+\cs	ros_teste.vim	/^nmap \\cs <Plug>NERDCommenterSexy$/;"	m
+\cs	ros_teste.vim	/^vmap \\cs <Plug>NERDCommenterSexy$/;"	m
+\cu	ros_teste.vim	/^nmap \\cu <Plug>NERDCommenterUncomment$/;"	m
+\cu	ros_teste.vim	/^vmap \\cu <Plug>NERDCommenterUncomment$/;"	m
+\cy	ros_teste.vim	/^nmap \\cy <Plug>NERDCommenterYank$/;"	m
+\cy	ros_teste.vim	/^vmap \\cy <Plug>NERDCommenterYank$/;"	m
+]	ros_teste.vim	/^inoremap <buffer> <silent> ] =AutoPairsInsert(']')$/;"	m
+__MODULAR_LIB_PKG_HELLO_WORLD_H	hello_world.h	3;"	d
+`	ros_teste.vim	/^inoremap <buffer> <silent> ` =AutoPairsInsert('`')$/;"	m
+gx	ros_teste.vim	/^nmap gx <Plug>NetrwBrowseX$/;"	m
+id	node.hpp	/^    int id;$/;"	m	class:node
+main	teste.cpp	/^int main(int argc, char** argv) {$/;"	f
+nh	node.hpp	/^    ros::NodeHandle nh;$/;"	m	class:node
+node	node.hpp	/^class node {$/;"	c
+nodes_ptr	ros_interface.hpp	/^    std::vector<node*> nodes_ptr;$/;"	m	class:ros_interface
+pose	node.hpp	/^    position pose;$/;"	m	class:node
+position	node.hpp	/^typedef struct position {$/;"	s
+position	node.hpp	/^} position;$/;"	t	typeref:struct:position
+pub	node.hpp	/^    ros::Publisher pub;$/;"	m	class:node
+ros_interface	ros_interface.hpp	/^class ros_interface {$/;"	c
+s:cpo_save	ros_teste.vim	/^let s:cpo_save=&cpo$/;"	v
+s:l	ros_teste.vim	/^let s:l = 1 - ((0 * winheight(0) + 11) \/ 23)$/;"	v
+s:so_save	ros_teste.vim	/^let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0$/;"	v
+s:sx	ros_teste.vim	/^let s:sx = expand("<sfile>:p:r")."x.vim"$/;"	v
+s:wipebuf	ros_teste.vim	/^  let s:wipebuf = bufnr('%')$/;"	v
+sub	node.hpp	/^    ros::Subscriber sub;$/;"	m	class:node
+theta	node.hpp	/^    double theta;   \/\/ angular velocity$/;"	m	struct:velocity
+theta	node.hpp	/^    double theta;   \/\/ direction$/;"	m	struct:position
+type	node.hpp	/^    int type;$/;"	m	class:node
+vel	node.hpp	/^    velocity vel;$/;"	m	class:node
+velocity	node.hpp	/^typedef struct velocity {$/;"	s
+velocity	node.hpp	/^} velocity;$/;"	t	typeref:struct:velocity
+x	node.hpp	/^    double x;       \/\/ position in x$/;"	m	struct:position
+x	node.hpp	/^    double x;       \/\/ velocity in x$/;"	m	struct:velocity
+y	node.hpp	/^    double y;       \/\/ position in y$/;"	m	struct:position
+y	node.hpp	/^    double y;       \/\/ velocity in y$/;"	m	struct:velocity
+z	node.hpp	/^    double z;       \/\/ position in z$/;"	m	struct:position
+z	node.hpp	/^    double z;       \/\/ velocity in z$/;"	m	struct:velocity
+zt	ros_teste.vim	/^normal! zt$/;"	m
+{	ros_teste.vim	/^inoremap <buffer> <silent> { =AutoPairsInsert('{')$/;"	m
+}	ros_teste.vim	/^inoremap <buffer> <silent> } =AutoPairsInsert('}')$/;"	m
+â	ros_teste.vim	/^inoremap <buffer> <silent> â =AutoPairsBackInsert()$/;"	m
+å	ros_teste.vim	/^inoremap <buffer> <silent> å =AutoPairsFastWrap()$/;"	m
+î	ros_teste.vim	/^inoremap <buffer> <silent> î :call AutoPairsJump()$/;"	m
+î	ros_teste.vim	/^noremap <buffer> <silent> î :call AutoPairsJump()$/;"	m
+ð	ros_teste.vim	/^inoremap <buffer> <silent> <expr> ð AutoPairsToggle()$/;"	m
+ð	ros_teste.vim	/^noremap <buffer> <silent> ð :call AutoPairsToggle()$/;"	m
